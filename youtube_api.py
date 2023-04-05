@@ -12,8 +12,8 @@ os.system('cls')
 def get_transcript(link):
     full_text = ''' '''
     video_transcript = YouTubeTranscriptApi.get_transcript(link)
-# print(video_transcript)
+    print(video_transcript)
     for item in range(len(video_transcript)):
         full_text += video_transcript[item]["text"] + " "
-        # print(video_transcript[item]["text"])
-    return full_text
+        print(video_transcript[item]["text"])
+    return [video_transcript, full_text]
