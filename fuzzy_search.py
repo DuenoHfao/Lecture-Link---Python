@@ -15,10 +15,9 @@ def find_string(user_input, long_string, dict_array):
             "Token Set": fuzz.token_set_ratio(user_input, long_string)
             }
     indv_input_words = user_input.split(" ")
-    return
     
 def input_subject(user_input):
         subjects = ["Mathematics", "Chemistry", "Physics", "Economics", "General Paper"]
         subject_choice = process.extract(user_input, subjects, limit=1)
-        print(subject_choice)
+        print(subject_choice[0][0])
         return subject_choice
