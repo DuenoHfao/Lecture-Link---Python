@@ -9,8 +9,21 @@ from thefuzz import fuzz
 from thefuzz import process
 
 def find_string(user_input, long_string, dict_array):
-        fuzz.ratio(user_input, long_string)
+        ratio = {"Ratio": fuzz.ratio(user_input, long_string),
+             "Partial": fuzz.partial_ratio(user_input, long_string),
+             "Token Sort": fuzz.token_sort_ratio(user_input, long_string),
+             "Token Set": fuzz.token_set_ratio(user_input, long_string)
+             }
+        input_break = user_input.split(" ")
+        ls_break = long_string.split(" ")
+        temp_corr = []
+        for item in input_break:
+                item = process.extractOne(item, ls_break, scorer=fuzz.token_set_ratio)[0]
+                temp_corr.append(item)
+
+        return temp_corr
         
+
     
 def input_subject(user_input):
         subjects = ["Mathematics", "Chemistry", "Physics", "Economics", "General Paper"]
