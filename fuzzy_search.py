@@ -8,7 +8,7 @@ import thefuzz
 from thefuzz import fuzz
 from thefuzz import process
 
-def find_string(user_input, long_string, dict_array):
+def find_string(user_input, long_string, full_text):
         ratio = {"Ratio": fuzz.ratio(user_input, long_string),
              "Partial": fuzz.partial_ratio(user_input, long_string),
              "Token Sort": fuzz.token_sort_ratio(user_input, long_string),
@@ -21,8 +21,12 @@ def find_string(user_input, long_string, dict_array):
                 item = process.extractOne(item, ls_break, scorer=fuzz.token_set_ratio)[0]
                 temp_corr.append(item)
 
-        return temp_corr
-        
+        to_return = []
+        for find_text in full_text:
+                for i in temp_corr:
+                        if find_text[0] == i:
+                                to_return.append(find_text["start"])
+        return to_return
 
     
 def input_subject(user_input):
