@@ -4,6 +4,7 @@ sys.path.append( '../../../../AppData/Local/Programs/Python/Python310/Lib/site-p
 # for path in sys.path:
 #     print(path)
 
+import math
 import thefuzz
 from thefuzz import fuzz
 from thefuzz import process
@@ -25,7 +26,7 @@ def find_string(user_input, long_string, full_text):
         for find_text in full_text:
                 for i in temp_corr:
                         if find_text[0] == i:
-                                to_return.append(find_text["start"])
+                                to_return.append(int(find_text["start"]))
         return to_return
 
     
