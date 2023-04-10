@@ -1,20 +1,20 @@
-import sys
-import os
-# sys.path.append( 'C:\Users\jeant\AppData\Local\Programs\Python\Python310\Lib\site-packages\thefuzz' )
-sys.path.append( '../../../../AppData/Local/Programs/Python/Python310/Lib/site-packages/' )
-# for path in sys.path:
-#     print(path)
-
-import youtube_transcript_api
-from youtube_transcript_api import YouTubeTranscriptApi
-os.system('cls')
+import requests
+from bs4 import BeautifulSoup
 
 
-link = "iG58Jo5udLA"
-full_text = ''' '''
-video_transcript = YouTubeTranscriptApi.get_transcript(link)
-print(video_transcript)
-for item in range(len(video_transcript)):
-    full_text += video_transcript[item]["text"] + " "
-    print(video_transcript[item]["text"])
-print([video_transcript, full_text])
+topics = {
+        "Physics": [],
+        "Chemistry": [],
+        "Mathematics": [],
+        "Economics": ["Central Economic Problem", "Basics of Market Economy", "Market Economy", "Elasticity Concepts", "Market Failure", "Equity", "Firms and Decisions", "Cost of Production", "Market Structure", "Decisions and Strategies of Firms", "Introduction to Macroeconomics", "National Income Accounting", "Monetary Policy", "Exchange Rate Policy", "Fiscal Policy", "Supply Side Policy", "Economic Growth", "Unemployment"]
+        }
+
+url = "https://www.youtube.com/watch?v=9mgTJR_FpyU"    
+reqs = requests.get(url)
+
+# using the BeautifulSoup module
+soup = BeautifulSoup(reqs.text, 'html.parser')
+
+# displaying the title
+for title in soup.find_all('title'):
+    print(title.get_text())
