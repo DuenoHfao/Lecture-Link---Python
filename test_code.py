@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 
 topics = {
         "Physics": [],
-        "Chemistry": [],
+        "Chemistry": ["Atomic Structure", ""],
         "Mathematics": [],
         "Economics": ["Central Economic Problem", "Basics of Market Economy", "Market Economy", "Elasticity Concepts", "Market Failure", "Equity", "Firms and Decisions", "Cost of Production", "Market Structure", "Decisions and Strategies of Firms", "Introduction to Macroeconomics", "National Income Accounting", "Monetary Policy", "Exchange Rate Policy", "Fiscal Policy", "Supply Side Policy", "Economic Growth", "Unemployment"]
         }
