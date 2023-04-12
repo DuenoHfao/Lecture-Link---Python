@@ -4,21 +4,34 @@ sys.path.append( '../../../../AppData/Local/Programs/Python/Python310/Lib/site-p
 # for path in sys.path:
 #     print(path)
 
+import math
 import thefuzz
 from thefuzz import fuzz
 from thefuzz import process
 
-search_string = "no gratification"
-test_case = '''Such is the rabbit hole of the internet, yet we keep coming back for the instant gratification.'''
-string_array = ["Instant gratification", "No gratification", "Lack of gratitude", "No gratitude"]
-ratio = {"Simple": fuzz.ratio(search_string, test_case), 
-         "Partial": fuzz.partial_ratio(search_string, test_case),
-         "Token Sort": fuzz.token_sort_ratio(search_string, test_case),
-         "Token Set": fuzz.token_set_ratio(search_string, test_case)
-         }
+def find_string(user_input, long_string, full_text):
+        ratio = {"Ratio": fuzz.ratio(user_input, long_string),
+             "Partial": fuzz.partial_ratio(user_input, long_string),
+             "Token Sort": fuzz.token_sort_ratio(user_input, long_string),
+             "Token Set": fuzz.token_set_ratio(user_input, long_string)
+             }
+        input_break = user_input.split(" ")
+        ls_break = long_string.split(" ")
+        temp_corr = []
+        for item in input_break:
+                item = process.extractOne(item, ls_break, scorer=fuzz.token_set_ratio)[0]
+                temp_corr.append(item)
 
-for items in ratio:
-    print(f"{items:10}: {ratio[items]}")
+        to_return = []
+        for find_text in full_text:
+                for i in temp_corr:
+                        if find_text[0] == i:
+                                to_return.append(int(find_text["start"]))
+        return to_return
 
-generic_scoring = process.extract(search_string, string_array, limit=2)
-print(generic_scoring)
+    
+def input_subject(user_input):
+        subjects = ["Mathematics", "Chemistry", "Physics", "Economics", "General Paper"]
+        subject_choice = process.extract(user_input, subjects, limit=1)
+        print(subject_choice[0][0])
+        return subject_choice
