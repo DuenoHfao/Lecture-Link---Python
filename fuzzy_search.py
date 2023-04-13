@@ -36,10 +36,14 @@ def input_subject(user_input):
         print(subject_choice[0][0])
         return subject_choice
 
-def find_topic():
+def find_topic(user_input, subject):
         topics = {
                 "Physics": [],
                 "Chemistry": ["Atomic Structure", "Atoms, Molecules and Stoichiometry & Redox", "Chemical Bonding", "The Gaseous State", "Chemical Energetics I", "Chemical Energetics II", "Reaction Kinetics", "Chemical Equilibria", "Solubility Equilibria", "Introduction to Organic Chemistry", "Alkanes", "Alkenes", "Arenes", "The Periodic Table", "Theories of Acids and Bases", "Halogen Derivatives", "Hydroxy Compounds", "Carbonyl Compounds", "Carboxylic Acids and Derivatives", "Nitrogen Compounds", "Electrochemistry", "Electrolytic Cell", "Transition Element", "Galvanic Cell"],
                 "Mathematics": [],
                 "Economics": ["Central Economic Problem", "Basics of Market Economy", "Market Economy", "Elasticity Concepts", "Market Failure", "Equity", "Firms and Decisions", "Cost of Production", "Market Structure", "Decisions and Strategies of Firms", "Introduction to Macroeconomics", "National Income Accounting", "Monetary Policy", "Exchange Rate Policy", "Fiscal Policy", "Supply Side Policy", "Economic Growth", "Unemployment"]
                 }
+        topic_toFind = topics[subject]
+        topic_choice = process.extract(user_input, topic_toFind, limit=1)
+        print(topic_choice[0][0])
+        return topic_choice
