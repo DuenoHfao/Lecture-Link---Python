@@ -9,24 +9,20 @@ import thefuzz
 from thefuzz import fuzz
 from thefuzz import process
 
-def find_string(user_input, long_string, full_text):
-        ratio = {"Ratio": fuzz.ratio(user_input, long_string),
-             "Partial": fuzz.partial_ratio(user_input, long_string),
-             "Token Sort": fuzz.token_sort_ratio(user_input, long_string),
-             "Token Set": fuzz.token_set_ratio(user_input, long_string)
-             }
+def find_string(user_input, long_string, full_text): #(input from the user, transcript with just the text, transcript with timestamps)
         input_break = user_input.split(" ")
         ls_break = long_string.split(" ")
         temp_corr = []
-        for item in input_break:
+        for item in input_break: #corrolates the input of the user with the long string of text input
                 item = process.extractOne(item, ls_break, scorer=fuzz.token_set_ratio)[0]
-                temp_corr.append(item)
+                temp_corr.append(item) 
 
         to_return = []
-        for find_text in full_text:
+        for find_text in full_text: #this function is unclear, need testing
+                print(find_text)
                 for i in temp_corr:
                         if find_text[0] == i:
-                                to_return.append(int(find_text["start"]))
+                                to_return.append([int(find_text["start"]), find_text["text"]]) #returns start timing and string of text from transcript
         return to_return
 
     
